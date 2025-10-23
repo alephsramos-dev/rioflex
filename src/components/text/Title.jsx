@@ -18,7 +18,7 @@ export default function Title({
 }) {
     return (
         <>
-            <TitleStyled className={className}>{children}</TitleStyled>
+            <TitleStyled className={className} data-aos="fade-up">{children}</TitleStyled>
         </>
     )
 }

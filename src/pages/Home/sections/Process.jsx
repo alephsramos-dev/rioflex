@@ -137,10 +137,16 @@ const Carousel = styled.div`
                 height: 44px;
                 border-radius: 16px;
                 display: flex;
+                cursor: pointer;
                 align-items: center;
                 justify-content: center;
                 color: ${(props) => props.theme.colors.neutral[800]};
                 background-color: ${(props) => props.theme.colors.neutral[200]};
+                transition: all 200ms ease;
+
+                &:hover {
+                    transform: scale(0.94);
+                }
             }
         }
     }

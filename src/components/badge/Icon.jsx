@@ -31,8 +31,9 @@ export default function BadgeIcon({
                 className={className} 
                 bgColor={bgColor} 
                 txtColor={txtColor}
+                data-aos="zoom-in"
             >
-                {Icon && <Icon weight="light" color={txtColor} />}
+                {Icon && <Icon weight="light" color={txtColor} data-aos="zoom-out" data-aos-delay="300"/>}
             </Content>
         </>
     )

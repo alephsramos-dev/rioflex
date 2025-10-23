@@ -90,7 +90,7 @@ export default function ProcessCard({
 }) {
     return (
         <>
-            <Content>
+            <Content data-aos="fade-up">
                 <TopTexts>
                     <BadgeIcon 
                         Icon={icon}

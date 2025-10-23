@@ -159,28 +159,28 @@ export default function Hero() {
                     />
                 </Texts>
                 <Images>
-                    <li className="i1">
+                    <li className="i1" data-aos="fade-up" data-aos-delay="100">
                         <img 
                             src={Lacres} 
                             alt="rioflex-fabrica-de-etiquetas-adesivo-para-lacres" 
                             loading="eager" 
                         />
                     </li>
-                    <li className="i2">
+                    <li className="i2" data-aos="fade-up" data-aos-delay="200">
                         <img 
                             src={Pizza} 
                             alt="rioflex-fabrica-de-etiquetas-adesivo-para-pizza" 
                             loading="eager" 
                         />
                     </li>
-                    <li className="i3">
+                    <li className="i3" data-aos="fade-up" data-aos-delay="300">
                         <img 
                             src={Acai} 
                             alt="rioflex-fabrica-de-etiquetas-adesivo-para-acai" 
                             loading="eager" 
                         />
                     </li>
-                    <li className="i4">
+                    <li className="i4" data-aos="fade-up" data-aos-delay="400">
                         <img 
                             src={Delivery} 
                             alt="rioflex-fabrica-de-etiquetas-adesivo-para-delivery" 

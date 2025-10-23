@@ -88,7 +88,6 @@ const ButtonRoot = styled.button`
 
 export default function ContactButton({
     children = "Criar minha etiqueta",
-    onClick = () => alert('botão não configurado'),
     className,
     bgColor,
     colorSlide,
@@ -96,8 +95,16 @@ export default function ContactButton({
     colorCorner,
     colorDiamond,
 }) {
+
+    const handleClickToForm = () => {
+        const form = document.getElementById("form");
+        if (form ) {
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     return (
-        <ButtonRoot onClick={onClick} className={className} bgColor={bgColor}>
+        <ButtonRoot onClick={handleClickToForm} className={className} bgColor={bgColor} data-aos="zoom-in">
             <CornerTR data-corner="tr" colorCorner={colorCorner}>
                 <Diamond colorDiamond={colorDiamond} />
             </CornerTR>

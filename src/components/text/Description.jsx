@@ -18,7 +18,7 @@ export default function Description({
 }) {
     return (
         <>
-            <DescriptionStyled className={className}>{children}</DescriptionStyled>
+            <DescriptionStyled className={className} data-aos="fade-up" data-aos-delay="200">{children}</DescriptionStyled>
         </>
     )
 }

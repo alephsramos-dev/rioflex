@@ -228,12 +228,25 @@ export default function FormLayout() {
     }, [setValue]);
 
     const onSubmit = async (data) => {
-        const payload = {
-            ...data,
-            submitted_at: new Date().toISOString(),
+        // Build a payload whose keys match the Google Sheets header row
+        // (example headers: nome, telefone, tipo_produto, quantidade_produto, page_url, page_referrer, utm_source, utm_term, utm_content, utm_campaign, utm_medium)
+        const sheetPayload = {
+            nome: data.name || '',
+            telefone: data.tel || '',
+            tipo_produto: data.productType || '',
+            quantidade_produto: data.qtdLabel || '',
+            page_url: data.page_url || window.location.href,
+            page_referrer: data.page_referrer || document.referrer || '',
+            utm_source: data.utm_source || '',
+            utm_term: data.utm_term || '',
+            utm_content: data.utm_content || '',
+            utm_campaign: data.utm_campaign || '',
+            utm_medium: data.utm_medium || '',
+            submitted_at: new Date().toISOString()
         };
 
-        console.table(payload);
+        // Helpful console output for debugging
+        console.table(sheetPayload);
 
         const endpoint = import.meta.env.VITE_GSHEET_WEBAPP_URL;
         if (!endpoint) {
@@ -245,11 +258,13 @@ export default function FormLayout() {
             const res = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(sheetPayload)
             });
-            const ok = res.ok;
-            const text = await res.text().catch(() => '');
-            console.log('Sheets response:', ok, text);
+
+            // If the response is JSON, try to read it for debug
+            let text = '';
+            try { text = await res.text(); } catch (e) { text = ''; }
+            console.log('Sheets response:', res.ok, text);
         } catch (err) {
             console.error('Sheets submit failed:', err);
         }
@@ -261,14 +276,14 @@ export default function FormLayout() {
 
     return (
         <>
-            <FormStyled onSubmit={handleSubmit(onSubmit)} className="formulario" id="contactForm" >
+            <FormStyled onSubmit={handleSubmit(onSubmit)} className="formulario" id="contactForm" data-aos="fade-up">
                 <Title
                     className="form-title"
                 >
                     Preencha todos os campos corretamente
                 </Title>
 
-                <label className="label">
+                <label className="label" data-aos="fade-up" data-aos-delay="100">
                     <span className="label-title">Qual o seu nome completo?</span>
                     <input
                         type="text"
@@ -279,7 +294,7 @@ export default function FormLayout() {
                     {errors?.name?.type === 'required' && <span className="error-text">*</span>}
                     {errors?.name?.type === 'minLength' && <span className="error-text">Precisa ter pelo menos 3 caracteres</span>}
                 </label>
-                <label className="label">
+                <label className="label" data-aos="fade-up" data-aos-delay="200">
                     <span className="label-title">Coloque seu número do WhatsApp?</span>
                     <input
                         className=""
@@ -292,7 +307,7 @@ export default function FormLayout() {
                     {errors?.tel?.type === 'minLength' && <span className="error-text">Precisa ter pelo menos 9 digitos</span>}
                     {errors?.tel?.type === 'maxLength' && <span className="error-text">Pode conter no máximo 16 digitos</span>}
                 </label>
-                <label className="label">
+                <label className="label" data-aos="fade-up" data-aos-delay="300">
                     <span className="label-title">Qual tipo de produto você trabalha?</span>
                     {/* Hidden input registered with RHF to keep validation/state */}
                     <input type="hidden" id="productType" {...register('productType', { required: true })} />
@@ -335,7 +350,7 @@ export default function FormLayout() {
                     </Dropdown>
                     {errors?.productType?.type === 'required' && <span className="error-text">*</span>}
                 </label>
-                <label className="label">
+                <label className="label" data-aos="fade-up" data-aos-delay="400">
                     <span className="label-title">Qual seria a quantidade de etiquetas desejadas?</span>
                     <input
                         className=""
@@ -368,3 +383,47 @@ export default function FormLayout() {
     )
 
 }
+
+
+// // Apps Script - doPost que aceita JSON ou form-encoded
+// function doPost(e) {
+//   try {
+//     // Extrai dados (suporta JSON ou form-encoded)
+//     var data = {};
+//     if (e.postData && e.postData.type === 'application/json') {
+//       data = JSON.parse(e.postData.contents);
+//     } else {
+//       data = e.parameter || {};
+//     }
+
+//     // Substitua pelo ID da sua planilha (a parte longa da URL do Google Sheets)
+//     var SPREADSHEET_ID = 'SUBSTITUA_POR_SEU_SPREADSHEET_ID';
+//     var SHEET_NAME = 'Sheet1'; // ou o nome da aba que você usa
+
+//     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+//     var sheet = ss.getSheetByName(SHEET_NAME) || ss.getSheets()[0];
+
+//     // Lê cabeçalhos (linha 1) e monta a linha conforme ordem do cabeçalho
+//     var lastCol = Math.max(sheet.getLastColumn(), 1);
+//     var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+//     var row = headers.map(function(h) {
+//       // remove espaços extras no header e usa chave exata
+//       var key = String(h).trim();
+//       return (data[key] !== undefined && data[key] !== null) ? data[key] : '';
+//     });
+
+//     // Se quiser, adicionar timestamp como última coluna separada:
+//     // row.push(new Date());
+
+//     sheet.appendRow(row);
+
+//     // Retorna JSON (ContentService). Deve funcionar para fetch() do browser.
+//     return ContentService
+//             .createTextOutput(JSON.stringify({result: 'success'}))
+//             .setMimeType(ContentService.MimeType.JSON);
+//   } catch (err) {
+//     return ContentService
+//             .createTextOutput(JSON.stringify({result: 'error', message: err.message}))
+//             .setMimeType(ContentService.MimeType.JSON);
+//   }
+// }

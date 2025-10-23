@@ -90,7 +90,7 @@ export default function IndicationCard({
 }) {
     return (
         <>
-            <AllElements top={top}>
+            <AllElements top={top} data-aos="fade-up">
                 <Bg></Bg>
                 <Content>
                     <img 

@@ -122,7 +122,7 @@ export default function Range() {
                     >
                         As empresas conhecem, por isso elas confiam, a <strong>Rio Flex é o destaque em etiquetas</strong> 
                     </Description>
-                    <Carousel>
+                    <Carousel data-aos="zoom-in">
                         <RangeCarousel />
                     </Carousel>
                 </RangeContainer>

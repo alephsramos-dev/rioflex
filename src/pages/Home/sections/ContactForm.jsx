@@ -127,7 +127,7 @@ const Texts = styled.div`
 export default function ContactForm() {
     return (
         <>
-            <AllElements>
+            <AllElements id="form">
                 <Bg></Bg>
                 <ContactFormContainer>
                     <Texts>

@@ -72,7 +72,7 @@ export default function FeaturesCard({
 }) {
     return (
         <>
-            <Content cardBgColor={cardBgColor}>
+            <Content cardBgColor={cardBgColor} data-aos="fade-up">
                 <BadgeIcon 
                     Icon={icon}
                     bgColor={bgColor}

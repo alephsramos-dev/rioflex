@@ -21,7 +21,6 @@ export default function HomeMain() {
             <Container>
                 <Hero /> 
                 <Range />
-                <Features />
                 <Indication />
                 <Process />
                 <ContactForm />

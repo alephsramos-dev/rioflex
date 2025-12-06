@@ -76,7 +76,44 @@ const FooterContainer = styled(Container)`
             transform: none;
         }
     }
+`
 
+const DeveloperBy = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 14px;
+    width: fit-content;
+    padding: 2px 8px 2px 2px;
+    border-radius: 8px;
+    background-color: ${(props) => props.theme.colors.base.black};
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+
+    & a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: ${(props) => props.theme.colors.base.white};
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 16px;
+        line-height: 100%;
+
+        & img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+    }
 `
 
 
@@ -88,9 +125,22 @@ export default function Footer() {
                 <FooterContainer>
                     <p>© 2008 RioFlex. Todos os direitos reservados.</p>
                     <Logo className="footer-logo" />
-                    <p>Desenvolvido por <a href="https://wa.me/+5524981411940"><AlephLogo /></a></p>
-                </FooterContainer>    
-            </AllElements>        
+                    <DeveloperBy>
+                        <a
+                            href="https://www.alephsramosdev.com.br?utm_source=rioflex&utm_medium=footer&utm_campaign=rioflex"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src="https://www.alephsramosdev.com.br/alephsramosdev-icon.png"
+                                alt="project-by-alephsramosdev"
+                                loading="lazy"
+                            />
+                            @alephsramosdev
+                        </a>
+                    </DeveloperBy>
+                </FooterContainer>
+            </AllElements>
         </>
     )
 }

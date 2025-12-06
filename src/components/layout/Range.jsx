@@ -120,7 +120,7 @@ export default function Range() {
                     <Description
                         className="description"
                     >
-                        As empresas conhecem, por isso elas confiam, a <strong>Rio Flex é o destaque em etiquetas</strong> 
+                        Quem exige <strong>prazo e qualidade</strong> <br />escolhe a Rio Flex 
                     </Description>
                     <Carousel data-aos="zoom-in">
                         <RangeCarousel />

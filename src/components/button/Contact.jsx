@@ -97,10 +97,7 @@ export default function ContactButton({
 }) {
 
     const handleClickToForm = () => {
-        const form = document.getElementById("form");
-        if (form ) {
-            form.scrollIntoView({ behavior: 'smooth' });
-        }
+        window.open('https://wa.me/5521964552960?text=Oi%2C%20vi%20o%20site%20da%20Rioflex%20e%20queria%20fazer%20um%20or%C3%A7amento', '_blank');
     }
 
     return (

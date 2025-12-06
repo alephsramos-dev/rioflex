@@ -11,57 +11,73 @@ import Pizza from "@assets/service/rioflex-etiqueta-pizza.webp";
 import Acai from "@assets/service/rioflex-etiqueta-acai.webp";
 import Delivery from "@assets/service/rioflex-etiqueta-delivery.webp";
 import BackgroundEffect from "@assets/pattern/background-effect.png";
- 
+import Artesanais from "@assets/service/rioflex-etiqueta-produtos-artesanais.webp";
+import Bopp from "@assets/service/BOPP.JPG";
+import Ecommerce from "@assets/service/Ecommerce.JPG";
+import LacreSeguranca from "@assets/service/LacreSeguranca.JPG";
+import Personalizadas from "@assets/service/Personalizadas.JPG";
+
 // Components 
 import Title from "@components/text/Title";
 import Description from "@components/text/Description";
 import ContactButton from "@components/button/Contact";
 
 const HeroContainer = styled(Container)`
-    padding: 0 0 0 5%;
+    padding: 0;
     gap: 32px;
     position: relative;
+    overflow: visible;
 
     ${down("tablet")} {
         flex-direction: column-reverse;
-        padding: 0 0% 10% 0%;
+        padding: 0 0 10% 0;
         gap: 24px;
     }
     
     &::before{
         content: '';
-        width: calc(50% + 32px);
+        width: 50vw;
         height: 100%;
         position: absolute;
         top: 0;
-        left: 0;
+        left: calc((100vw - 1440px) / -2);
         background: url(${BackgroundEffect}) no-repeat center;
         background-size: cover;
         z-index: -2;
         opacity: 0.2;
 
         ${down("tablet")} {
-            width: 100%;
+            width: 100vw;
             height: 50%;
             top: 40%;
+            left: calc((100vw - 100%) / -2);
+        }
+
+        @media (max-width: 1440px) {
+            left: -5%;
         }
     }
 
     &::after{
         content: '';
-        width: calc(50% + 32px);
+        width: 50vw;
         height: 100%;
         position: absolute;
         top: 0;
-        left: 0;
+        left: calc((100vw - 1440px) / -2);
         background: linear-gradient(-35deg, ${(props) => props.theme.colors.base.white} 50%, transparent 100%);
         z-index: -1;
 
         ${down("tablet")} {
-            width: 100%;
+            width: 100vw;
             height: 50%;
             top: 50%;
+            left: calc((100vw - 100%) / -2);
             background: linear-gradient(35deg, ${(props) => props.theme.colors.base.white} 50%, transparent 100%);
+        }
+
+        @media (max-width: 1440px) {
+            left: -5%;
         }
     }
 `
@@ -71,12 +87,14 @@ const Texts = styled.aside`
     display: flex;
     align-items: flex-start;    
     flex-direction: column;
-    gap: 16px;
+    gap: 26px;
     height: auto;
+    padding: 0 2.5%;
 
     ${down("tablet")} {
         width: 100%;
         padding: 0 5%;
+        max-width: 100%;
     }
 
     & .logo {
@@ -113,6 +131,12 @@ const Images = styled.ol`
     grid-template-rows: repeat(5, 1fr); // 5 rows
     grid-column-gap: 8px;
     grid-row-gap: 8px;
+    padding-right: 0;
+    margin-right: calc((100vw - 1440px) / -2);
+
+    @media (max-width: 1440px) {
+        margin-right: -5%;
+    }
 
     & .i1 { grid-area: 1 / 1 / 3 / 2; } // row 1 at 3 and col 1 at 2
     & .i2 { grid-area: 3 / 1 / 6 / 2; } // row 3 at 6 and col 1 at 2
@@ -131,7 +155,7 @@ const Images = styled.ol`
     ${down("tablet")} {
         width: 100%;
         max-height: 70vh;
-
+        margin-right: 0;
     }
 `
 
@@ -140,51 +164,50 @@ export default function Hero() {
         <>
             <HeroContainer>
                 <Texts>
-                    <LogoRioFlex 
+                    <LogoRioFlex
                         className="logo"
                     />
                     <Title
                         className="title"
                     >
-                        Sua marca <strong>merece etiquetas</strong> de qualidade
+                        Compre direto da fábrica com <strong>agilidade e preço justo</strong>
                     </Title>
                     <Description
                         className="description"
                     >
-                        Para docerias, restaurantes e pequenos negócios <strong>que querem se destacar</strong>
+                        <strong>A qualidade que sua marca merece</strong> com a rapidez que sua operação precisa.
                     </Description>
-                    <ContactButton 
-                        children="Criar minha etiqueta"
-                        onClick={() => alert("Button clicked")}
+                    <ContactButton
+                        children="Pedir orçamento agora"
                     />
                 </Texts>
                 <Images>
                     <li className="i1" data-aos="fade-up" data-aos-delay="100">
-                        <img 
-                            src={Lacres} 
-                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-lacres" 
-                            loading="eager" 
+                        <img
+                            src={Artesanais}
+                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-lacres"
+                            loading="eager"
                         />
                     </li>
                     <li className="i2" data-aos="fade-up" data-aos-delay="200">
-                        <img 
-                            src={Pizza} 
-                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-pizza" 
-                            loading="eager" 
+                        <img
+                            src={Ecommerce}
+                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-pizza"
+                            loading="eager"
                         />
                     </li>
                     <li className="i3" data-aos="fade-up" data-aos-delay="300">
-                        <img 
-                            src={Acai} 
-                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-acai" 
-                            loading="eager" 
+                        <img
+                            src={Bopp}
+                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-acai"
+                            loading="eager"
                         />
                     </li>
                     <li className="i4" data-aos="fade-up" data-aos-delay="400">
-                        <img 
-                            src={Delivery} 
-                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-delivery" 
-                            loading="eager" 
+                        <img
+                            src={Delivery}
+                            alt="rioflex-fabrica-de-etiquetas-adesivo-para-delivery"
+                            loading="eager"
                         />
                     </li>
                 </Images>

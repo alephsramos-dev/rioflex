@@ -11,10 +11,7 @@ import BackgroundEffect from "@assets/pattern/background-effect.png";
 import Title from "@components/text/Title"
 import Description from "@components/text/Description"
 import ContactButton from "@components/button/Contact"
-import IndicationCard from "@components/card/Indication"
-
-// Data
-import indicationData from "@/db/Indication"
+import IndicationCarousel from "@components/carousel/Indication"
 
 const AllElements = styled.section`
     position: relative;
@@ -95,7 +92,8 @@ const Texts = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
+    text-align: center;
     gap: 32px;
 
     ${down("tablet")} {
@@ -105,7 +103,7 @@ const Texts = styled.div`
     }
 
     & .title {
-        flex: 1;
+        width: 80%;
         color: ${(props) => props.theme.colors.base.white};
 
         ${down("tablet")} {
@@ -121,6 +119,11 @@ const Texts = styled.div`
         align-items: flex-start;
         justify-content: center;
         gap: 16px;
+
+        ${down("tablet")} {
+            align-items: center;
+            text-align: center;
+        }
 
         & .description {
             width: 100%;
@@ -138,17 +141,18 @@ const Texts = styled.div`
         }
 
         & .contact-button {
+            display: none;
+
+            ${down("tablet")} {
+                display: flex;
+            }
         }
     }
 `
 
-const Cards = styled.ol`
+const Cards = styled.div`
     width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
+    position: relative;
 `
 
 export default function Indication() {
@@ -161,7 +165,7 @@ export default function Indication() {
                         <Title
                             className="title"
                         >
-                            Para quem a Rio Flex é indicada?
+                            Da produção à entrega, temos a etiqueta certa para você.
                         </Title>
                         <div
                             className="content"
@@ -169,11 +173,11 @@ export default function Indication() {
                             <Description
                                 className="description"
                             >
-                                Para microempreendedores, pequenas empresas e projetos pessoais que precisam de etiquetas de qualidade.
+                                Soluções para cada etapa do seu negócio, direto da fábrica.
                             </Description>
-                            <ContactButton 
+                            <ContactButton
                                 className="contact-button"
-                                children="Criar minha etiqueta"
+                                children="Pedir orçamento agora"
                                 bgColor="rgb(252, 252, 252)"
                                 colorSlide="rgb(242, 242, 242)"
                                 colorLabel="rgb(254, 141, 34)"
@@ -183,26 +187,10 @@ export default function Indication() {
                         </div>
                     </Texts>
                     <Cards>
-                        {
-                            indicationData.map((indication, i) => (
-                                <IndicationCard
-                                    key={`${i} - ${indication.id}`}
-                                    title={indication.title}
-                                    description={indication.description}
-                                    image={indication.image}
-                                    top={
-                                        i === 0 ? "20px" :
-                                        i === 1 ? "40px" :
-                                        i === 2 ? "60px" :
-                                        i === 3 ? "80px" : 
-                                        i === 4 ? "100px" : "100px"
-                                    }
-                                />
-                            ))
-                        }
+                        <IndicationCarousel />
                     </Cards>
-                </IndicationContainer>    
-            </AllElements>        
+                </IndicationContainer>
+            </AllElements>
         </>
     )
 }

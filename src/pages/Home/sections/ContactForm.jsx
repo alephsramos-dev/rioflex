@@ -3,14 +3,14 @@ import styled from "@emotion/styled"
 // Layout
 import { down } from "@styles/media"
 import Container from "@components/layout/Container"
-import FormLayout from "@components/layout/Form"
 
 // Components
 import Title from "@components/text/Title"
 import Description from "@components/text/Description"
+import TestimonialCard from "@components/card/Testimonial"
 
-// Assets
-import BackgroundEffect from "@assets/pattern/background-effect.png"
+// Data
+import testimonialsData from "@/db/testimonials"
 
 const AllElements = styled.section`
     position: relative;
@@ -28,123 +28,103 @@ const Bg = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.colors.neutral[900]};
+    background: ${(props) => props.theme.colors.base.white};
     z-index: -1;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 60%;
-        height: 100%;
-        background: url(${BackgroundEffect}) no-repeat center;
-        mix-blend-mode: luminosity;
-        opacity: 0.1;
-        z-index: -2;
-        background-size: cover;
-
-        ${down("tablet")} {
-            width: 100%;
-        }
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(-125deg, ${(props) => props.theme.colors.neutral[900]} 40%, rgba(33, 33, 33, 0) 100%);
-        z-index: -1;
-
-        ${down("tablet")} {
-            width: 100%;
-            background: linear-gradient(45deg, ${(props) => props.theme.colors.neutral[900]} 60%, rgba(33, 33, 33, 0) 100%);    
-        }
-    }
 `
 
 const ContactFormContainer = styled(Container)`
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 5%;
-    gap: 32px;
+    padding: 0% 5% 5% 5%;
+    gap: 48px;
     position: relative;
 
     ${down("tablet")} {
-        padding: 7.5% 5%;
-        flex-direction: column;
-        gap: 42px;
+        padding: 8% 5%;
+        gap: 36px;
     }
 `
 
 const Texts = styled.div`
-    width: 50%;
+    width: 100%;
+    max-width: 800px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 32px;
+    text-align: center;
+    gap: 16px;
 
     ${down("tablet")} {
-        flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
-        width: 100%;
+        text-align: left;
     }
 
     & .title {
-        flex: 1;
-        color: ${(props) => props.theme.colors.base.white};
+        color: ${(props) => props.theme.colors.neutral[900]};
+        font-size: 38px;
 
         ${down("tablet")} {
             width: 100%;
-            font-size: 28px;
+            font-size: 30px;
         }
     }
     
     & .description {
-        width: 100%;
-        color: ${(props) => props.theme.colors.neutral[200]};
-        font-size: 20px;
+        color: ${(props) => props.theme.colors.neutral[600]};
+        font-size: 18px;
+        line-height: 1.5;
 
         ${down("tablet")} {
-            width: 100%;
             font-size: 16px;
         }
+    }
+`
 
-        & strong {
-            color: ${(props) => props.theme.colors.neutral[400]};
-        }
+const TestimonialsGrid = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    ${down("tablet")} {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 `
 
 export default function ContactForm() {
     return (
         <>
-            <AllElements id="form">
+            <AllElements id="testimonials">
                 <Bg></Bg>
                 <ContactFormContainer>
                     <Texts>
-                        <Title
-                            className="title"
-                        >
-                            Vamos iniciar seu projeto!
+                        <Title className="title">
+                            O que nossos parceiros dizem
                         </Title>
-                        <Description
-                            className="description"
-                        >
-                            Preencha o <strong>formulário para que consigamos entrar em contato</strong> direto com você, e fique tranquilo, todas as suas informações serão usadas apenas para fins de contato!
+                        <Description className="description">
+                            Não acredite apenas na nossa palavra. Veja o feedback real de quem confia sua operação à Rio Flex.
                         </Description>
                     </Texts>
-                    <FormLayout />
-                </ContactFormContainer>    
-            </AllElements>      
+                    <TestimonialsGrid>
+                        {testimonialsData.map((testimonial) => (
+                            <TestimonialCard
+                                key={testimonial.id}
+                                rating={testimonial.rating}
+                                text={testimonial.text}
+                                author={testimonial.author}
+                                role={testimonial.role}
+                                tags={testimonial.tags}
+                                accentColor={testimonial.accentColor}
+                            />
+                        ))}
+                    </TestimonialsGrid>
+                </ContactFormContainer>
+            </AllElements>
         </>
     )
 }

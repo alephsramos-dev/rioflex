@@ -4,7 +4,7 @@ const testimonialsData = [
         rating: 5,
         text: "Entrei no Mercado Livre em 2022 e comecei com a Rio então. É uma parceria de grande confiança. Sempre entregam no prazo correto e inclusive conseguem antecipar diversos vezes.",
         author: "Parceiro Mercado Livre",
-        role: "Vendedor em Jacaraciagua",
+        role: "Vendedor em Jacarepaguá",
         tags: ["#Agilidade", "#Parceria"],
         accentColor: "rgb(24, 179, 90)"
     },
@@ -13,7 +13,7 @@ const testimonialsData = [
         rating: 5,
         text: "Minha empresa sempre foi muito bem atendida. Material de boa qualidade, preço justo e entrega no prazo índico.",
         author: "Adriana",
-        role: "Compradora de IBAD",
+        role: "Compradora da IBAD",
         tags: ["#Preço Justo", "#Qualidade"],
         accentColor: "rgb(254, 141, 34)"
     },
